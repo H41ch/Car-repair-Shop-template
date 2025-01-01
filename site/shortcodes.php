@@ -51,17 +51,17 @@ define("CSS_PATH", "css/");
             line-height: 1.7;
         }
 
-		h2 + h3{
-			margin-top: 30px;
-		}
+        h2 + h3{
+            margin-top: 30px;
+        }
 
-		h3 + .row{
-			margin-top: 20px;
-		}
+        h3 + .row{
+            margin-top: 20px;
+        }
 
-		.row + h3{ 
-			margin-top: 60px;	
-		}
+        .row + h3{ 
+            margin-top: 60px;	
+        }
 
 
         .box .box__left, 
@@ -215,7 +215,7 @@ define("CSS_PATH", "css/");
                         $icons = array(); 
 
                         while (($line = fgets($handle)) !== false) {  
-                            if (preg_match("/\.(" . ( (basename($filename, ".css") == "material-design") || (basename($filename, ".css") == "hotel-pictograms") ? "(flaticon)|(material-design)" : basename($filename, ".css")) . "-[\w\d_-]+)\:before\s*\{/i", $line, $result)) {
+                            if (preg_match("/\.(" . ( (basename($filename, ".css") == "material-design") || (basename($filename, ".css") == "hotel-pictograms") ? "(flaticon)|(material-design)" : basen...
                                 array_push($icons, $result[1]);  
                             }                            
                           
