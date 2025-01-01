@@ -1,7 +1,6 @@
 <?php
 
-$recipients = 'test@demolink.com';
-//$recipients = '#';
+$recipients = 'noblemotcentre@gmail.com';
 
 try {
     require './phpmailer/PHPMailerAutoload.php';
@@ -33,23 +32,26 @@ try {
                 $subject = 'A message from your site visitor';
                 break;
         }
-    }else{
+    } else {
         die('MF004');
     }
 
     if (isset($_POST['email'])) {
+        if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+            die('MF003');
+        }
         $template = str_replace(
             ["<!-- #{FromState} -->", "<!-- #{FromEmail} -->"],
-            ["Email:", $_POST['email']],
+            ["Email:", htmlspecialchars($_POST['email'])],
             $template);
-    }else{
+    } else {
         die('MF003');
     }
 
     if (isset($_POST['message'])) {
         $template = str_replace(
             ["<!-- #{MessageState} -->", "<!-- #{MessageDescription} -->"],
-            ["Message:", $_POST['message']],
+            ["Message:", htmlspecialchars($_POST['message'])],
             $template);
     }
 
@@ -58,7 +60,7 @@ try {
         if ($key != "email" && $key != "message" && $key != "form-type" && !empty($value)){
             $info = str_replace(
                 ["<!-- #{BeginInfo} -->", "<!-- #{InfoState} -->", "<!-- #{InfoDescription} -->"],
-                ["", ucfirst($key) . ':', $value],
+                ["", ucfirst($key) . ':', htmlspecialchars($value)],
                 $tmp[0][0]);
 
             $template = str_replace("<!-- #{EndInfo} -->", $info, $template);
@@ -74,10 +76,10 @@ try {
     $mail->From = $_POST['email'];
 
     if (isset($_POST['name'])){
-        $mail->FromName = $_POST['name'];
-    }else{
+        $mail->FromName = htmlspecialchars($_POST['name']);
+    } else {
         $mail->FromName = "Site Visitor";
-    } 
+    }
 
     foreach ($addresses[0] as $key => $value) {
         $mail->addAddress($value[0]);
@@ -90,7 +92,7 @@ try {
     if (isset($_FILES['attachment'])) {
         foreach ($_FILES['attachment']['error'] as $key => $error) {
             if ($error == UPLOAD_ERR_OK) {
-                $mail->AddAttachment($_FILES['attachment']['tmp_name'][$key], $_FILES['Attachment']['name'][$key]);
+                $mail->AddAttachment($_FILES['attachment']['tmp_name'][$key], $_FILES['attachment']['name'][$key]);
             }
         }
     }
@@ -99,9 +101,11 @@ try {
 
     die('MF000');
 } catch (phpmailerException $e) {
-    die('MF254');
+    error_log($e->getMessage());
+    die('Email sending failed. Please try again later.');
 } catch (Exception $e) {
-    die('MF255');
+    error_log($e->getMessage());
+    die('An unexpected error occurred. Please try again later.');
 }
 
 ?>
