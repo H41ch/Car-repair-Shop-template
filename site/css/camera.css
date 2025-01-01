@@ -1,24 +1,26 @@
-/**
-* @subsection   Camera.css
-*
-* @description   a jQuery slideshow with many effects, transitions, easy to customize, using canvas and mobile ready, *based on jQuery 1.4+
-*
-* @author       Manuel Masia
-* @link         www.pixedelic.com
-* @license      MIT license - http://www.opensource.org/licenses/mit-license.php
-**/
+:root {
+  --primary-color: #1caffc;
+  --secondary-color: #fff;
+  --padding-left-right: 15px;
+  --padding-bottom-large: 725px;
+  --padding-bottom-small: 40.91797%;
+  --height-large: 525px;
+  --border-radius: 50%;
+  --transition-time: 0.3s;
+}
+
 .camera_container {
   position: relative;
 }
 
 @media (min-width: 992px) {
   .camera_container {
-    padding-bottom: 725px;
+    padding-bottom: var(--padding-bottom-large);
   }
 }
 @media (min-width: 1771.83771px) {
   .camera_container {
-    padding-bottom: 40.91797%;
+    padding-bottom: var(--padding-bottom-small);
   }
 }
 
@@ -29,7 +31,7 @@
   width: 100%;
   margin-bottom: 0 !important;
   height: 100%;
-  background: #fff;
+  background: var(--secondary-color);
   z-index: 0;
 }
 @media (min-width: 992px) {
@@ -39,7 +41,7 @@
 }
 @media (max-width: 767px) {
   .camera_wrap {
-    height: 525px !important;
+    height: var(--height-large) !important;
   }
 }
 
@@ -63,20 +65,8 @@
   position: relative;
   width: 100%;
   z-index: 1;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  -webkit-align-items: center;
-  -moz-align-items: center;
   align-items: center;
-  -ms-justify-content: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  -moz-justify-content: center;
   justify-content: center;
 }
 
@@ -86,7 +76,7 @@
   right: 0;
   top: 0;
   bottom: 0;
-  color: #fff;
+  color: var(--secondary-color);
 }
 
 .cameraContent {
@@ -130,8 +120,8 @@
 }
 
 .camera_loader {
-  background: #fff url(../images/camera-loader.gif) no-repeat center;
-  border: 1px solid #ffffff;
+  background: var(--secondary-color) url(../images/camera-loader.gif) no-repeat center;
+  border: 1px solid var(--secondary-color);
   border-radius: 18px;
   height: 36px;
   left: 50%;
@@ -195,7 +185,7 @@
 
 /*================   Custom Layout&Styles   =====================*/
 .camera_caption {
-  color: #fff;
+  color: var(--secondary-color);
   text-align: center;
 }
 @media (min-width: 768px) {
@@ -210,8 +200,8 @@
 .camera_pag {
   margin-right: auto;
   margin-left: auto;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: var(--padding-left-right);
+  padding-right: var(--padding-left-right);
   min-width: 300px;
 }
 .camera_pag:before, .camera_pag:after {
@@ -256,18 +246,13 @@
   line-height: 21px;
   text-align: center;
   cursor: pointer;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  border-radius: 50%;
+  border-radius: var(--border-radius);
   background-color: transparent;
-  border: 3px solid #1caffc;
-  -moz-transition: 0.3s all ease;
-  -o-transition: 0.3s all ease;
-  -webkit-transition: 0.3s all ease;
-  transition: 0.3s all ease;
+  border: 3px solid var(--primary-color);
+  transition: var(--transition-time) all ease;
 }
 .camera_pag_ul li.cameracurrent, .camera_pag_ul li:hover {
-  background: #1caffc;
+  background: var(--primary-color);
 }
 .camera_pag_ul li + li {
   margin-left: 11px;
@@ -281,20 +266,8 @@
   left: 0px;
   width: 100%;
   height: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  -webkit-align-items: center;
-  -moz-align-items: center;
   align-items: center;
-  -ms-justify-content: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  -moz-justify-content: center;
   justify-content: center;
   pointer-events: none;
 }
@@ -313,12 +286,9 @@
 .onCamera {
   margin-right: auto;
   margin-left: auto;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: var(--padding-left-right);
+  padding-right: var(--padding-left-right);
   min-width: 300px;
-  z-index: 999;
-  padding-left: 15px;
-  padding-right: 15px;
   z-index: 999;
 }
 .onCamera:before, .onCamera:after {
